@@ -3,7 +3,7 @@
     clock module.
     
     The sketch will calculate the current tide height in
-    San Diego (assuming clock is set correctly) and display
+    Monterey (assuming clock is set correctly) and display
     the tide height and time on a ssd1306-controller OLED
     128x64 display. Time updates every second, tide updates
     as the last significant digit changes (10-20 seconds). 
@@ -20,10 +20,12 @@ RTC_DS3231 RTC; // Uncomment when using this chip
 
 // Tide calculation library setup.
 // Change the library name here to predict for a different site.
-#include "TidelibSanDiegoSanDiegoBay.h"
-//#include "TidelibMontereyMontereyHarborCalifornia.h"
+//#include "TidelibSanDiegoSanDiegoBay.h"
+#include "TidelibMontereyMontereyHarborCalifornia.h"
 // Other sites available at http://github.com/millerlp/Tide_calculator
 TideCalc myTideCalc; // Create TideCalc object 
+
+
 
 // 0X3C+SA0 - 0x3C or 0x3D
 #define I2C_ADDRESS 0x3C
@@ -33,6 +35,8 @@ SSD1306AsciiWire oled;
 long oldmillis; // keep track of time
 float results; // San Diego tide height
 DateTime now; // define variable to hold date and time
+// Enter the site name for display. 11 characters max
+char siteName[11] = "Monterey";  
 //------------------------------------------------------------------------------
 void setup() {
   Wire.begin();  
@@ -59,7 +63,8 @@ void loop() {
       results = myTideCalc.currentTide(now); 
       oled.home();
       oled.set2X();      
-      oled.println("San Diego");
+//      oled.println("San Diego");
+      oled.println(siteName);
       oled.print(results, 3); // print tide ht. to 3 decimal places
       oled.println(" ft.");
       oled.set1X();
