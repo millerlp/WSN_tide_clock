@@ -6,3 +6,6 @@ controller. The software includes my tide calculator
 libraries http://github.com/millerlp/Tide_calculator 
 and the simple ASCII library for OLED displays available
 at https://github.com/greiman/SSD1306Ascii. 
+
+
+![tide clock](/images/Simple_tide_clock_20151130.jpg "Tide clock")
